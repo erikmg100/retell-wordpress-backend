@@ -1,16 +1,11 @@
 import express from 'express';
 import cors from 'cors';
-
 const app = express();
 const port = process.env.PORT || 3001;
 
-// Configure CORS
+// Configure CORS - UPDATED TO ALLOW ALL ORIGINS
 app.use(cors({
-  origin: [
-    'https://frontend-eight-zeta-72.vercel.app',
-    'http://localhost:3000',
-    'http://localhost:5173'
-  ],
+  origin: '*',  // This allows ALL websites to connect
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -40,7 +35,7 @@ app.post('/create-web-call', async (req, res) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        agent_id: 'agent_5dd51015619e030d2022ab251e',
+        agent_id: 'agent_a6915efc7c8d27c2170a41a2d4',  // UPDATED TO YOUR AGENT ID
         ...req.body
       })
     });
@@ -60,7 +55,6 @@ app.post('/create-web-call', async (req, res) => {
       call_id: webCallResponse.call_id,
       agent_id: webCallResponse.agent_id
     });
-
   } catch (error) {
     console.error('Error creating web call:', error);
     res.status(500).json({
