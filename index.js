@@ -1,11 +1,16 @@
 import express from 'express';
 import cors from 'cors';
+
 const app = express();
 const port = process.env.PORT || 3001;
 
-// Configure CORS - UPDATED TO ALLOW ALL ORIGINS
+// Configure CORS
 app.use(cors({
-  origin: '*',  // This allows ALL websites to connect
+  origin: [
+    'https://retell-wordpress.vercel.app',
+    'http://localhost:3000',
+    'http://localhost:5173'
+  ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -35,7 +40,7 @@ app.post('/create-web-call', async (req, res) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        agent_id: 'agent_a6915efc7c8d27c2170a41a2d4',  // UPDATED TO YOUR AGENT ID
+        agent_id: 'agent_5dd51015619e030d2022ab251e',
         ...req.body
       })
     });
